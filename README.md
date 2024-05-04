@@ -1,9 +1,9 @@
 ## Sobre o Projeto
 Essa aplicação busca desenvolver um software de simulação bancaria.
 ## Estrutura das Pastas
-/src  
-  /controllers
-  /models
+/src           # M
+  /controllers # S
+  /models      # s
   /routes
 /docs
 /tests
@@ -15,4 +15,9 @@ Essa aplicação busca desenvolver um software de simulação bancaria.
 - **Fazer saque**:
 - **Consultar saldo**:
 - **Realizar depositor**:
-- **Registrar eventos que ocorrem durante a execução dessas funcionalidades**:  
+- **Registrar eventos que ocorrem durante a execução dessas funcionalidades**:
+## Rodando o codigo:
+```bash
+git clone https://github.com/pedroita/bank_dark
+
+```
