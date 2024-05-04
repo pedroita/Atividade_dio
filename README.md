@@ -18,6 +18,6 @@ Essa aplicação busca desenvolver um software de simulação bancaria.
 - **Registrar eventos que ocorrem durante a execução dessas funcionalidades**:
 ## Rodando o codigo:
 ```bash
-git clone https://github.com/pedroita/bank_dark
+git clone [https://github.com/pedroita/bank_dark](https://github.com/pedroita/bank_dark.git)
 
 ```
