@@ -1,53 +1,92 @@
 import datetime
 
-menu = """
-
+def menu_operacoes():
+    menu = """
 [d] Depositar
 [s] Sacar
 [e] Extrato
+[c] Criar Usuario
 [q] Sair
 
 => """
+    return menu
 
-#variaveis
-deposito = 0
-saque = 0
-extrato  = []
-LIMITE_SAQUE_DIARIO = 3
-limite_de_retirada_diario = 500.00
-saldo = 0
-now = datetime.datetime.now()
-cont_saque_diario = 0
-valor_sacado_desejado = 0
-while True:
-    opcao = input(menu)
-    if opcao == 'd' or opcao == 'D':
-        deposito = float(input("Digite o valor que queira depoistar: "))
-        saldo += deposito
-        extrato.append(f"O deposito foi de R${deposito:.2f}  realizado no dia {now.strftime('%Y-%m-%d %H:%M:%S')}  e o valor foi R${saque:.2f}  ")
-
-        print (f"Seu saldo atual é de : {saldo}")
-    elif opcao == 'S' or opcao == 's':
-         saque = float(input("Quanto você deseja sacar? "))
-         if saque>saldo:
-             print("não é possivel sacar você não possue esse saldo")
-         elif saque <= saldo and cont_saque_diario<LIMITE_SAQUE_DIARIO:
-             saldo-= saque
-             cont_saque_diario= cont_saque_diario+1
-             extrato.append(f"Saque realizado em {now.strftime('%Y-%m-%d %H:%M:%S')} e o valor foi de R${saque:.2f}  ")
-             print (f"seu saldo é de {saldo}")
-         else:
-             print(f"Você estourou o limite de saque, seu limite é {LIMITE_SAQUE_DIARIO}")
-    elif opcao == "e" or opcao == "E":
-        if not extrato:
-            print("ainda não houveram movimentações")
-        else:
-            for registro in extrato:
-                print (registro)
-    elif opcao == "q" or opcao == "Q":
-        print ("saindo.....")
-        break
+def realizar_deposito(saldo, valor, extrato):
+    now = datetime.datetime.now()
+    if valor>0:
+        saldo += valor
+        extrato.append(f"Depósito:\tR$ {valor:.2f} Realizado no dia {now.strftime('%Y-%m-%d %H:%M:%S')}")
     else:
-        print("opção invalida")
-    
+        print("Digite um valor valido!")
+    return saldo, extrato
 
+def realizar_saque(saldo, valor, extrato, limite_retirada, numero_saques, limite_saques):
+    now = datetime.datetime.now()
+
+    exedeu_saldo = valor > saldo
+    exedeu_limite = valor > limite_retirada
+    exedeu_saque = numero_saques >= limite_saques
+    
+    if exedeu_saldo: 
+        return saldo, extrato, f"O valor R$ {valor} é maior que seu saldo"
+    elif exedeu_limite:
+        return saldo, extrato, "O valor de retirada é maior que o limite diário de saque"
+    elif exedeu_saque:
+        return saldo, extrato, "Você estourou o número de limite de saque diário"
+    
+    if valor>0:
+        saldo -= valor
+        numero_saques += 1
+        extrato.append(f"Saque:\t\t R${valor:.2f} Realizado no dia {now.strftime('%Y-%m-%d %H:%M:%S')}")
+        print ("Saque realizado com sucesso!")
+    else:
+        print("Valor para saque INVALIDO!!")
+    return saldo, extrato, "" 
+
+def exibir_extrato(saldo, extrato):
+    print("\n================ EXTRATO ================")
+    if not extrato:
+        print("Não foram realizadas movimentações.")
+    else:
+        for movimentacao in extrato:
+            print(movimentacao)
+    print(f"\nSaldo:\t\tR$ {saldo:.2f}")
+    print("==========================================")
+
+def main():
+    LIMITE_SAQUE = 3
+    saldo = 0
+    limite_de_retirada_diario = 500.00
+    extrato = []
+    numero_saques = 0
+    
+    while True:
+        opcao = input(menu_operacoes())
+        
+        if opcao.lower() == 'd':
+            valor_deposito = float(input("Digite o valor que deseja depositar: "))
+            saldo, extrato = realizar_deposito(saldo, valor_deposito, extrato)
+            print(f"O saldo da conta agora é R$ {saldo:.2f}")
+        elif opcao.lower() == 's':
+            valor_saque = float(input("Quanto você deseja sacar? "))
+            saldo, extrato, mensagem = realizar_saque(saldo, valor_saque, extrato, limite_de_retirada_diario, numero_saques, LIMITE_SAQUE)
+            print(f"O saldo da sua conta agora é {saldo:.2f}")
+            if mensagem:
+                print(mensagem)
+        elif opcao.lower() == 'e':
+            exibir_extrato(saldo, extrato)
+        elif opcao.lower() == 'q':
+            print("Saindo...")
+            break
+        else:
+            print("Opção inválida.")
+
+main()
+
+
+
+def criar_usario(usario):
+    return
+
+def filtrar_usario(cpf,usuario):
+    return 

@@ -1,0 +1,15 @@
+def realizar_deposito(saldo,valor):
+    return saldo_atualizado, extrato
+def realizar_saque(saldo,valor,extrato,limite,numero_saques,limite_saque):
+    return saldo_atual, extrato 
+def visualizar_extrato(saldo, *,extato):
+    return 0
+
+def criar_usuario(nome,data,nascimento,cpf, **endereco):
+    return 0
+def criar_conta(agencia,numero_conta+1,usuario):
+    return 0
+def lista_contas():
+    return 0
+def lista_contas():
+    return 0
