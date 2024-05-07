@@ -1,40 +1,39 @@
-
-def realizar_saque(saldo,valor,extrato,limite,numero_saques,limite_saque):
-    return saldo_atual, extrato 
-def visualizar_extrato(saldo, *,extato):
-    return 0
-
-def criar_usuario(nome,data,nascimento,cpf, **endereco):
-    return 0
-def criar_conta(agencia,numero_conta+1,usuario):
-    return 0
-def lista_contas():
-    return 0
-def lista_contas():
-    return 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    def realizar_saque(saldo,valor,extrato,limite,numero_saques,limite_saque):
-    return saldo_atual, extrato 
-def visualizar_extrato(saldo, *,extato):
-    return 0
-
-def criar_usuario(nome,data,nascimento,cpf, **endereco):
-    return 0
-def criar_conta(agencia,numero_conta,usuario):
-    return 0
-def lista_contas():
-    return 0
-def lista_contas():
+    AGENCIA = "0001"
+    LIMITE_SAQUE = 3
+    saldo = 0
+    limite_de_retirada_diario = 500.00
+    extrato = []
+    numero_saques = 0
+    usuarios = []
+    contas = []
+    while True:
+        opcao = input(menu_operacoes())
+        if opcao.lower() == 'd':
+            valor_deposito = float(input("Digite o valor que deseja depositar: "))
+            saldo, extrato = realizar_deposito(saldo, valor_deposito, extrato)
+            print(f"O saldo da conta agora é R$ {saldo:.2f}")
+        elif opcao.lower() == 's':
+            valor_saque = float(input("Quanto você deseja sacar? "))
+            saldo, extrato, mensagem = realizar_saque(saldo, valor_saque, extrato, limite_de_retirada_diario, numero_saques, LIMITE_SAQUE)
+            print(f"O saldo da sua conta agora é {saldo:.2f}")
+            if mensagem:
+                print(mensagem)
+        elif opcao.lower() == 'e':
+            exibir_extrato(saldo, extrato)
+        elif opcao.lower() == "c":
+            criar_usario(usuarios)
+            
+        elif opcao == "nc":
+            numero_conta = len(contas) + 1
+            conta = criar_conta(AGENCIA, numero_conta, usuarios)
+            if conta:
+                contas.append(conta)    
+        
+        elif opcao.lower() == "lc":
+            listar_contas(contas)
+            
+        elif opcao.lower() == 'q':
+            print("Saindo...")
+            break
+        else:
+            print("Opção inválida.")
