@@ -17,11 +17,10 @@ def realizar_saque(cpf, contas, extrato, saldo):
         saldo_atual = conta_usuario["saldo"]
         limite_saque = conta_usuario["limite_saque"]
         limite_retirada = conta_usuario["limite_retirada"]
-        
+        numero_saques = conta_usuario.get("numero_saques", 0) 
         
         extrato = conta_usuario["extrato"]
         now = datetime.datetime.now() 
-        numero_saques = 0
         if valor_saque > 0:
             print(f"Valor do saque: {valor_saque}")
             print(f"Saldo disponível: {saldo_atual}")
@@ -29,13 +28,13 @@ def realizar_saque(cpf, contas, extrato, saldo):
             # Verifica se o valor do saque excede o saldo ou os limites
             if valor_saque > saldo_atual:
                 print("Erro! O valor de saque excede o saldo disponível.")
-            if numero_saques >= limite_saque:
-                print("Erro! O valor de saque excede o limite diário de saque.")
+            elif numero_saques >= limite_saque:
+                print("Erro! Você não tem mais saques hoje")
             elif valor_saque > limite_retirada:
                 print("Erro! O valor de saque excede o limite diário de retirada.")
             else:
                 conta_usuario["saldo"]-=valor_saque
-                conta_usuario["limite_retirada"] -=1
+                conta_usuario["limite_saque"] -=1
                 numero_saques+=1
                 extrato.append(f"Saque:\tR$ {valor_saque:.2f} Realizado no dia {now.strftime('%Y-%m-%d %H:%M:%S')}")
                 print(f"Saque de R$ {valor_saque:.2f} realizado com sucesso na conta {conta_usuario['numero_conta']}")
