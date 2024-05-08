@@ -46,7 +46,7 @@ def main():
         if opcao.lower() == 's':
             print("Realizando saque...")
             cpf = input("Digite o CPF da conta que voce deseja realizar o saque: ")
-            if valida_cpf(cpf) == "ok":
+            if valida_cpf(cpf) == 1:
                 realizar_saque(cpf, contas, extrato,saldo)
                 
         if opcao.lower() == 'lc':
