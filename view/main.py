@@ -5,6 +5,8 @@ from controller.gerencimento_deposito import realizar_deposito
 from lista_contas import listar_contas
 
 from validacoes.validacao_cpf import limpar_cpf, valida_cpf
+from view.exibir_extrato import exibir_extrato
+from view.lista_usuarios import listar_usuarios
 from view.msg import menu_operacoes
 
 
@@ -44,12 +46,19 @@ def main():
         if opcao.lower() == 's':
             print("Realizando saque...")
             cpf = input("Digite o CPF da conta que voce deseja realizar o saque: ")
-            if valida_cpf(cpf) == 1:
+            if valida_cpf(cpf) == "ok":
                 realizar_saque(cpf, contas, extrato,saldo)
                 
         if opcao.lower() == 'lc':
             print("Listando contas....")
             listar_contas(contas)
+        if opcao.lower() == 'lu':
+            print("Usuarioss")
+            listar_usuarios(usuarios)
+
+        if opcao.lower() == 'e':
+            print("Extrado..")
+            exibir_extrato(saldo,extrato)
             
         elif opcao.lower() == 'q':
             print("Saindo...")

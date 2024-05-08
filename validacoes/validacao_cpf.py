@@ -1,11 +1,12 @@
 import re
 
 def valida_cpf(cpf):
-    expr = re.compile(r'\d{3}\.?\d{3}\.?\d{3}-?\d{2}')
-    if expr.match(cpf):
-        return 1
-    else:
+    cpf_corrigido = limpar_cpf(cpf)
+    
+    if cpf_corrigido is None or len(cpf_corrigido)!=11:
         return 0
+    else:
+        return 1
   
 def limpar_cpf(cpf):
     cpf_limpo = re.sub(r'\D', '', cpf)
