@@ -2,7 +2,6 @@ from account import Account
 from transaction import Transaction
 
 
-
 class Client(Account,Transaction):
     def __init__(self,address,accounts):
         self.__address = address
